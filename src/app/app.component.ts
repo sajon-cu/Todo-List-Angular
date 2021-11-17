@@ -11,10 +11,10 @@ export class AppComponent {
   title = 'todo';
 
   list = new TodoList("Sajon", [
-    new TodoItem("Go for lunch"),
+    new TodoItem("Go for lunch", true),
     new TodoItem("Collect ticket"),
     new TodoItem("Lunch break"),
-    new TodoItem("Make dinner"),
+    new TodoItem("Make dinner", true),
     new TodoItem("Play football at evening"),
     new TodoItem("Take rest"),
     new TodoItem("Give reaward to all new user"),
@@ -33,7 +33,7 @@ export class AppComponent {
   }
 
   get items(): readonly TodoItem[] {
-    return this.list.items.filter( item => !item.complete)
+    return this.list.items.filter( item => this.showComplete || !item.complete)
   }
 
   addTask(newItem: String) {
@@ -41,4 +41,6 @@ export class AppComponent {
       this.list.addItem(new TodoItem(newItem))
     }
   }
+
+  showComplete:Boolean = false
 }
